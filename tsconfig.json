@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "suppressImplicitAnyIndexErrors": true,  // 允许 obj['a'] 这样使用，而非必须 obj[1]
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
