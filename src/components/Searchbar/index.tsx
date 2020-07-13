@@ -15,6 +15,7 @@ export interface SearchBarValue {
 export interface SearchBarItemOption {
   label: string;
   value: string;
+  children?: SearchBarItemOption[];
 }
 export interface SearchBarItem {
   key: string;
@@ -40,8 +41,6 @@ export interface SearchBarProps {
   onReset?: () => void,
   onExpand?: () => void,
 }
-
-// 默认栅格设置
 const defaultFormItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -52,7 +51,6 @@ const defaultFormItemLayout = {
     sm: { span: 16 }
   }
 };
-// item类型
 const formItemsObj = {
   // 待扩展
   input: (value: any) => {
@@ -115,7 +113,7 @@ const formItemsObj = {
   }
 };
 
-export class SearchBar extends React.Component<SearchBarProps>{
+export class SearchBar extends React.Component<SearchBarProps, any>{
   formRef = React.createRef<FormInstance>();
   onSearch = () => {
     this.formRef.current.validateFields().then((values: any[]) => {
@@ -213,6 +211,7 @@ export class SearchBar extends React.Component<SearchBarProps>{
               className={`searchBtnStyle ${styles.searchBtn}`}
               icon={<SearchOutlined />}
               onClick={this.onSearch}
+              type={'primary'}
             >
               查询
             </Button>
