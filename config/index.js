@@ -3,7 +3,7 @@ module.exports = {
   build: {
     env: 'prod',
     index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist/static/'),
+    assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'assets',// static
     assetsPublicPath: '/static/', // /static/
     productionSourceMap: false,

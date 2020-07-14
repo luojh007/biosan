@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import './App.css';
-import { SearchBar, SearchBarValue, SearchBarItem } from "./components/Searchbar";
+import { SearchBarValue, SearchBarItem } from "./components/Searchbar/interface";
+import { SearchBar } from './components'
 const dataScore: SearchBarItem[] = [
     {
         type: 'input',

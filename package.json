@@ -1,16 +1,20 @@
 {
-  "name": "tstest",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "boisan",
+  "version": "1.0.1",
+  "description": "业务组件库",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack --config ./build/webpack.prod.conf.js",
-    "build:test": "NODE_ENV=production WEBPACK_ENV=test webpack --config ./build/webpack.prod.conf.js",
     "start": "node ./build/dev.server.js",
     "build:deploy": "./build/deploy.sh"
   },
-  "author": "",
+  "author": "luojiahao@biosan.cn",
+  "homepage": "https://github.com/luojh007/biosan.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luojh007/biosan.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@types/react": "^16.9.41",

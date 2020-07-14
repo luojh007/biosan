@@ -2,45 +2,13 @@ import * as React from 'react';
 import { Row, Input, Button, Select, Form, DatePicker, Cascader } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { DownOutlined, UpOutlined, SearchOutlined } from '@ant-design/icons';
+import { SearchBarProps, SearchBarItemOption } from './interface'
 const styles = require('./searchBar.less')
 import moment = require('moment');
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
 const dateFormat = 'YYYY-MM-DD';
-
-export interface SearchBarValue {
-  [keyName: string]: any;
-}
-export interface SearchBarItemOption {
-  label: string;
-  value: string;
-  children?: SearchBarItemOption[];
-}
-export interface SearchBarItem {
-  key: string;
-  label: string;
-  type: string;
-  options?: SearchBarItemOption[];
-  disabled?: boolean;
-  allowClear?: boolean;
-  keys?: string[],
-  defaultValue?: {},
-  className?: string,
-  filterOption?: (v: string, o: object) => void;
-  onChangeCallback?: (v: string, o: object) => void;
-  onKeyDown?: (e: React.KeyboardEvent) => void
-}
-export interface SearchBarProps {
-  value: SearchBarValue;
-  dataScore: SearchBarItem[];
-  expand?: boolean,
-  pageName?: string,
-  canSearch?: boolean,
-  onSearch: (v: SearchBarValue) => void;
-  onReset?: () => void,
-  onExpand?: () => void,
-}
 const defaultFormItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -113,7 +81,7 @@ const formItemsObj = {
   }
 };
 
-export class SearchBar extends React.Component<SearchBarProps, any>{
+export default class SearchBar extends React.Component<SearchBarProps, any>{
   formRef = React.createRef<FormInstance>();
   onSearch = () => {
     this.formRef.current.validateFields().then((values: any[]) => {
