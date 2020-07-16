@@ -4,6 +4,7 @@ const baseWebpack = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 var config = require('../config')
 const pkg = require('../package.json')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次构建清除上一次打包出来的文件
 const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -11,35 +12,50 @@ function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
 const prodConfig = {
-  // mode: 'production',
-  devtool: 'source-map',
-  entry: path.resolve(__dirname, '../src/index.tsx'), //指定入口文件，程序从这里开始编译,__dirname当前所在目录, ../表示上一级目录, ./同级目录
+  mode: 'production',
+  // devtool: 'source-map',
+  entry: path.resolve(__dirname, '../src/components/index.tsx'), //指定入口文件，程序从这里开始编译,__dirname当前所在目录, ../表示上一级目录, ./同级目录
   output: {
     library: pkg.name,
-    libraryTarget: 'umd',  // 任意一种打包方式，common，amd，全局gobal
-    libraryExport: 'default',
-
+    libraryTarget: 'umd',  // 任意一种打包方式，common，amd，全局gobal    
     path: config.build.assetsRoot,
-    publicPath: '/dist/',
     filename: '[name].js',
-    // chunkFilename: 'js/[name]/[chunkhash].js' // [name] bundle-loader 的name配置值
   },
-  //压缩js,css
-  optimization: {
-    minimizer: [
-      new TerserJSPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true
-          }
-        }
-      }),
-      new OptimizeCssAssetsPlugin({})
-    ],
-    splitChunks: {
-      chunks: 'all',
+  externals: {
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
     },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
+    'moment': {
+      root: 'moment',
+      commonjs2: 'moment',
+      commonjs: 'moment',
+      amd: 'moment',
+    },
+    "antd": "antd",
   },
+
+  //压缩js,css
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [
+  //     new TerserJSPlugin({
+  //       sourceMap: true,
+  //     }),
+  //     // new OptimizeCssAssetsPlugin({})
+  //   ],
+  //   // splitChunks: {
+  //   //   chunks: 'all',
+  //   // },
+  // },
   module: {
     rules: [
       {
@@ -109,6 +125,7 @@ const prodConfig = {
       filename: "./css/[name].css",
       chunkFilename: "./css/[name].css"
     }),
+    new CleanWebpackPlugin(),
   ],
 }
 module.exports = merge(baseWebpack, prodConfig)
