@@ -2,7 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import './App.css';
 import { SearchBarValue, SearchBarItem } from "./components/Searchbar/interface";
-import { SearchBar } from './components'
+import { tableHead, tableItem } from "./components/InputTemplate/interface";
+import { SearchBar, InputTemplate } from './components'
 const dataScore: SearchBarItem[] = [
     {
         type: 'input',
@@ -77,6 +78,14 @@ const value: SearchBarValue = {
     birthday: undefined,
     address: undefined,
 }
+const inputTabledataScore: tableItem[] = [{
+    id: 1,
+    description: '描述11111',
+}, {
+    id: 2,
+    description: '描述11222',
+}]
+const inputTableHead: tableHead = { number: '序号', description: '常用临床诊断模板', opt: '操作' }
 class App extends React.Component<any, any>{
     constructor(props: any) {
         super(props)
@@ -90,14 +99,34 @@ class App extends React.Component<any, any>{
     onExpand = () => {
         this.setState({ expand: !this.state.expand })
     }
+    choiseClick = (value) => {
+        console.log(value)
+    }
+    saveItem = (value) => {
+        console.log(value)
+    }
+    deleteItem = (id) => {
+        console.log(id)
+    }
+    // 重新加载
+    reloadData = () => {
+
+    }
     render() {
         return (
-            <SearchBar
-                value={value}
-                dataScore={dataScore}
-                expand={this.state.expand}
-                onSearch={this.onSearch}
-                onExpand={this.onExpand}
+            // <SearchBar
+            //     value={value}
+            //     dataScore={dataScore}
+            //     expand={this.state.expand}
+            //     onSearch={this.onSearch}
+            //     onExpand={this.onExpand}
+            // />
+            <InputTemplate
+                tableList={inputTabledataScore}
+                saveItem={this.saveItem}
+                deleteItem={this.deleteItem}
+                reloadData={this.reloadData}
+                choiseItem={this.choiseClick}
             />
         )
     }

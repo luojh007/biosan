@@ -1,2 +1,2 @@
 export { default as SearchBar } from './Searchbar';
-// export { default as Button } from './Button';
+export { default as InputTemplate } from './InputTemplate';

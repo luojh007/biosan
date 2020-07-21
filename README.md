@@ -7,3 +7,5 @@ npm install biosan
 import { SearchBar } from 'biosan'
 import 'biosan/dist/css/main.css'
 
+### 依赖
+antd4.0，react16.9，moment
